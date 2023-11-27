@@ -6,11 +6,20 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:38:02 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/27 19:58:36 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:38:12 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*free_function(char *wardrobe, char *buffer)
+{
+	char	*temp;
+
+	temp = ft_strjoin(wardrobe, buffer);
+	free(wardrobe);
+	return (temp);
+}
 
 char	*cutter(char *wardrobe)
 {
@@ -42,8 +51,7 @@ char	*remover(char *wardrobe)
 	while (wardrobe[end] == '\n')
 		end++;
 	new_wardrobe = ft_strdup(wardrobe + end);
-	if (new_wardrobe == NULL)
-		return (NULL);
+	free(wardrobe);
 	return (new_wardrobe);
 }
 
@@ -62,7 +70,7 @@ char	*get_next_line(int fd)
 		if (bytes == -1)
 			return (NULL);
 		buffer[bytes] = '\0';
-		wardrobe = ft_strjoin(wardrobe, buffer);
+		wardrobe = free_function(wardrobe, buffer);
 		if (ft_strchr(wardrobe, '\n') != NULL)
 			break ;
 	}
