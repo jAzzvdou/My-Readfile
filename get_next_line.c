@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:38:02 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/27 17:08:26 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:58:36 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*cutter(char *wardrobe)
 	if (single_line == NULL)
 		return (NULL);
 	single_line[end] = '\0';
-	while (single_line--)
+	while (end--)
 		single_line[end] = wardrobe[end];
 	return (single_line);
 }
@@ -52,14 +52,14 @@ char	*get_next_line(int fd)
 	static char	*wardrobe;
 	char		buffer[BUFFER_SIZE + 1];
 	char		*single_line;
-	size_t		bytes;
+	int		bytes;
 
 	wardrobe = NULL;
 	bytes = BUFFER_SIZE;
 	while (bytes == BUFFER_SIZE)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
-		if (bytes == (size_t)(-1))
+		if (bytes == -1)
 			return (NULL);
 		buffer[bytes] = '\0';
 		wardrobe = ft_strjoin(wardrobe, buffer);

@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:09:39 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/27 16:51:38 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:52:10 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -60,9 +62,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (new_s == NULL)
 		return (NULL);
 	i = 0;
-	while (*s1)
+	while (s1 && *s1)
 		new_s[i++] = *s1++;
-	while (*s2)
+	while (s2 && *s2)
 		new_s[i++] = *s2++;
 	new_s[i] = '\0';
 	return (new_s);
