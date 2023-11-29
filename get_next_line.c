@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:38:02 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/27 20:38:12 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:32:37 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,63 +23,79 @@ char	*free_function(char *wardrobe, char *buffer)
 
 char	*cutter(char *wardrobe)
 {
-	char	*single_line;
-	size_t	end;
+	char	*single;
+	int		end;
 
 	end = 0;
 	while (wardrobe[end] && wardrobe[end] != '\n')
 		end++;
-	while (wardrobe[end] == '\n')
+	if (wardrobe[end] == '\n')
 		end++;
-	single_line = malloc(end + 1);
-	if (single_line == NULL)
+	single = malloc(end + 1);
+	if (!single)
 		return (NULL);
-	single_line[end] = '\0';
+	single[end] = '\0';
 	while (end--)
-		single_line[end] = wardrobe[end];
-	return (single_line);
+		single[end] = wardrobe[end];
+	if (single[0] == '\0')
+	{
+		free(single);
+		return (NULL);
+	}
+	return (single);
 }
 
 char	*remover(char *wardrobe)
 {
 	char	*new_wardrobe;
-	size_t	end;
+	int		end;
 
 	end = 0;
 	while (wardrobe[end] && wardrobe[end] != '\n')
 		end++;
-	while (wardrobe[end] == '\n')
+	if (wardrobe[end] == '\n')
 		end++;
+	if (wardrobe[end] == '\0')
+	{
+		free(wardrobe);
+		return (NULL);
+	}
 	new_wardrobe = ft_strdup(wardrobe + end);
 	free(wardrobe);
 	return (new_wardrobe);
 }
 
-char	*get_next_line(int fd)
+char	*reader(int fd)
 {
 	static char	*wardrobe;
-	char		buffer[BUFFER_SIZE + 1];
-	char		*single_line;
-	int		bytes;
+	char		*buffer;
+	char		*single;
+	int			bytes;
 
-	wardrobe = NULL;
-	bytes = BUFFER_SIZE;
-	while (bytes == BUFFER_SIZE)
+	bytes = 1;
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	while (bytes > 0 && (!wardrobe || !ft_strchr(wardrobe, '\n')))
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
+		{
+			free(buffer);
 			return (NULL);
+		}
 		buffer[bytes] = '\0';
 		wardrobe = free_function(wardrobe, buffer);
-		if (ft_strchr(wardrobe, '\n') != NULL)
-			break ;
 	}
-	single_line = cutter(wardrobe);
-	if (single_line[0] == '\0')
-	{
-		free(single_line);
-		return (NULL);
-	}
+	free(buffer);
+	single = cutter(wardrobe);
 	wardrobe = remover(wardrobe);
-	return (single_line);
+	return (single);
+}
+
+char	*get_next_line(int fd)
+{
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	return (reader(fd));
 }

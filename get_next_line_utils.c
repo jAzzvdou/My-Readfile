@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:09:39 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/27 19:52:10 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:12:16 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (str == NULL)
+	if (!str)
 		return (0);
 	while (str[i])
 		i++;
@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s)
 	char	*final;
 
 	final = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (final == NULL)
+	if (!final)
 		return (NULL);
 	i = -1;
 	while (s[++i])
@@ -51,7 +51,7 @@ char	*ft_strdup(const char *s)
 	return (final);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	char	*new_s;
