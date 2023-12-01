@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:00:44 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/29 19:48:58 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:10:44 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strdup(const char *s)
 {
+	int		s_size;
 	int		i;
 	char	*final;
 
-	final = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	s_size = ft_strlen(s);
+	if (!s_size)
+		return (NULL);
+	final = (char *)malloc(sizeof(char) * (s_size + 1));
 	if (!final)
 		return (NULL);
 	i = -1;

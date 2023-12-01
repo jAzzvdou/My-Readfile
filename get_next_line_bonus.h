@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:01:42 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/29 19:49:07 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:58:09 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif //BUFFER_SIZE
 
 # include <unistd.h>

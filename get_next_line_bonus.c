@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:58:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/29 20:17:17 by jazevedo         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:13:46 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,15 @@ char	*reader(int fd, char *wardrobe)
 	free(buffer);
 	single = cutter(wardrobe);
 	wardrobe = remover(wardrobe);
+	free(wardrobe);
 	return (single);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*wardrobe[1024];
-	char		*single;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || fd > 1024)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd >= 1024)
 		return (NULL);
-	single = reader(fd, wardrobe[fd]);
-	free(*wardrobe);
-	return (single);
+	return (reader(fd, wardrobe[fd]));
 }
