@@ -5,67 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 15:09:39 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/11/29 14:12:16 by jazevedo         ###   ########.fr       */
+/*   Created: 2023/12/05 09:13:01 by jazevedo          #+#    #+#             */
+/*   Updated: 2023/12/05 11:57:09 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+void	*bzero_malloc(int buffersize)
 {
-	size_t	i;
+	char	*final;
+	int		i;
+
+	final = (char *)malloc(buffersize);
+	if (!final)
+		return (NULL);
+	i = -1;
+	while (++i < buffersize)
+		final[i] = 0;
+	return (final);
+}
+
+int	strchr_with_key(int key, char *box, char c)
+{
+	int	i;
+
+	if (key == 1 && !box)
+		return (-2);
+	i = -1;
+	while (box && box[++i])
+	{
+		if (box[i] == c)
+			return (i);
+	}
+	return (-1);
+}
+
+int	ft_strlen(char *s)
+{
+	int	i;
 
 	i = 0;
-	if (!str)
+	if (!s)
 		return (0);
-	while (str[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*join_n(char *box, char *str_buffer, int newline)
 {
-	char	ch;
-
-	ch = c;
-	while (*s && *s != ch)
-		s++;
-	if (*s == ch)
-		return ((char *)s);
-	return (NULL);
-}
-
-char	*ft_strdup(const char *s)
-{
-	int		i;
 	char	*final;
+	int		i;
+	int		ii;
 
-	final = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (str_buffer[0] == '\0')
+		return (NULL);
+	final = malloc(sizeof(char) * (ft_strlen(box) + newline + 1));
 	if (!final)
 		return (NULL);
-	i = -1;
-	while (s[++i])
-		final[i] = s[i];
+	i = 0;
+	while (box && box[i])
+	{
+		final[i] = box[i];
+		i++;
+	}
+	ii = 0;
+	while (str_buffer && str_buffer[ii] && ii < newline)
+		final[i++] = str_buffer[ii++];
 	final[i] = '\0';
+	if (box)
+		cleaner(&box);
 	return (final);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*strdup_n(char *box, int newline)
 {
-	size_t	i;
-	char	*new_s;
+	char	*final;
+	int		i;
 
-	if (!s1 && !s2)
+	final = malloc(sizeof(char) * (newline + 1));
+	if (!final)
 		return (NULL);
-	new_s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (new_s == NULL)
-		return (NULL);
-	i = 0;
-	while (s1 && *s1)
-		new_s[i++] = *s1++;
-	while (s2 && *s2)
-		new_s[i++] = *s2++;
-	new_s[i] = '\0';
-	return (new_s);
+	i = -1;
+	while (box && box[++i] && i < newline)
+		final[i] = box[i];
+	final[i] = '\0';
+	return (final);
 }
