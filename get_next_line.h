@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 08:18:55 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/12/05 11:27:19 by jazevedo         ###   ########.fr       */
+/*   Created: 2023/11/25 15:14:16 by jazevedo          #+#    #+#             */
+/*   Updated: 2023/11/29 19:49:16 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
-# endif //Buffer size
+# endif //BUFFER_SIZE
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -23,10 +23,9 @@
 char	*get_next_line(int fd);
 
 //UTILS
-int		ft_strlen(char *s);
-int		strchr_with_key(int key, char *s, char c);
-void	cleaner(char **s);
-void	*bzero_malloc(int buffersize);
-char	*strdup_n(char *box, int newline);
-char	*join_n(char *box, char *str_buffer, int newline);
+size_t	ft_strlen(const char *str);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char *s1, char *s2);
+
 #endif //GNL
