@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 11:40:05 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/12/05 11:57:20 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line_bonus.h"
 
 void	*bzero_malloc(int buffersize)
@@ -41,7 +29,7 @@ int	strchr_with_key(int key, char *box, char c)
 	return (-1);
 }
 
-int	ft_strlen(char *s)
+int	my_strlen(char *s)
 {
 	int	i;
 
@@ -61,7 +49,7 @@ char	*join_n(char *box, char *str_buffer, int newline)
 
 	if (str_buffer[0] == '\0')
 		return (NULL);
-	final = malloc(sizeof(char) * (ft_strlen(box) + newline + 1));
+	final = malloc(sizeof(char) * (my_strlen(box) + newline + 1));
 	if (!final)
 		return (NULL);
 	i = 0;

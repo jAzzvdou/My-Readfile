@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 11:37:42 by jazevedo          #+#    #+#             */
-/*   Updated: 2023/12/05 11:54:30 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line_bonus.h"
 
 void	cleaner(char **s)
@@ -23,7 +11,7 @@ char	*new_box(char **box, int newline)
 	char	*temporary;
 	int		i;
 
-	i = ft_strlen(*box) - newline;
+	i = my_strlen(*box) - newline;
 	temporary = strdup_n(*box + newline, i);
 	cleaner(box);
 	*box = temporary;
@@ -42,11 +30,11 @@ char	*result(char **box, int newline, int readed_bytes)
 	}
 	single_line = NULL;
 	if (newline == -1)
-		newline = ft_strlen(*box);
+		newline = my_strlen(*box);
 	else
 		newline++;
 	single_line = strdup_n(*box, newline);
-	if (newline == ft_strlen(*box))
+	if (newline == my_strlen(*box))
 		cleaner(box);
 	else
 		*box = new_box(box, newline);
